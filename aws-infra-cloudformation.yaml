@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Creating a Blog generater using aws Bedrock, lambda and api gateway
+
+Parameters:
+  BucketName:
+    Type: String
+    Default: blog-test-bucket-bedrock
+
+
+Resources:
+
+  MainBucket:
+    Type: AWS::S3::BucketName
+    Properties:
+      BucketName: !Ref BucketName
+      
