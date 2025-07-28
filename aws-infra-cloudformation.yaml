@@ -13,4 +13,31 @@ Resources:
     Type: AWS::S3::BucketName
     Properties:
       BucketName: !Ref BucketName
-      
+
+  LambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: blog-generater
+      Handler: lambdaApp.lambda_handler
+      Role: !GetAtt LambdaRole.arn
+      Code:
+        S3Bucket: !Ref BucketName
+        S3Key: artifact/lambdaApp.zip
+      Runtime: python3.10
+      Timeout: 60
+      MemorySize: 256
+
+  APIGateway:
+    Type: AWS::APIGateway::RestApi
+    Properties:
+      Name: blog-generater
+      EndpointConfiguration:
+        Types:
+          - REGIONAL
+      Body:
+        swagger: '2.0'
+        info:
+          title: !Sub ${AWS::StackName}-API}
+          version: '1.0-SNAPSHOT'
+          description: 'API for lambda'
+            
