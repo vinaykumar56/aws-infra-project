@@ -19,10 +19,9 @@ Resources:
     Properties:
       FunctionName: blog-generater
       Handler: lambdaApp.lambda_handler
-      Role: !GetAtt LambdaRole.arn
       Code:
         S3Bucket: !Ref BucketName
-        S3Key: artifact/lambdaApp.zip
+        S3Key: vinay-balyan/artifact/lambdaApp.zip
       Runtime: python3.10
       Timeout: 60
       MemorySize: 256
